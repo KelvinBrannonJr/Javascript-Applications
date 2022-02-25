@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript201-Project</title>
+    <style>
+        body{
+            background-color: grey;
+        }
+
+        #btn {
+            background-color: black;
+            color:white;
+            height: 100px;
+            width: 100px;
+            position: inherit; 
+            top: 70%;
+            left: 50%
+        }
+        .container {
+            background-color: white;
+            height: 450px;
+            width: 1000px;
+            position: absolute;
+            margin: 2em 10em;
+            border: 2px solid black;
+        }
+
+    </style>
+</head>
+<body>
+        <div class="container">
+            <strong>Name:</strong><div id="name"></div>
+            <strong>Birth Year:</strong>  <div id="birth_year"></div>
+            <strong>Height:</strong><div id="height"></div>
+            <strong>Mass:</strong><div id="mass"></div>
+            <strong>Gender:</strong><div id="gender"></div>
+            <strong>Home World:</strong><div id="homeworld"></div>
+
+            <button class="getRandomCharacter" id="btn">Shuffle</button>
+        </div>
+        
+
+        <script>
+                       
+                const name = document.getElementById("name");
+                const birth_year = document.getElementById("birth_year");
+                const height = document.getElementById("height");
+                const mass = document.getElementById("mass");
+                const gender = document.getElementById("gender");
+                const homeworld = document.getElementById("homeworld");
+                const button = document.querySelector(".getRandomCharacter");
+
+            function ApiInterface(){
+
+                button.addEventListener('click',(e)=> {
+                e.preventDefault();
+            
+                    const randomNumber = Math.ceil(Math.random() * 83);
+                
+                    fetch(`https://swapi.dev/api/people/${randomNumber}/`)
+                    .then(response => response.json())
+                    .then(character => {
+                        name.innerHTML = character['name'];
+                        birth_year.innerHTML = character['birth_year'];
+                        height.innerHTML = character['height'];
+                        mass.innerHTML = character['mass'];
+                        gender.innerHTML = character['gender'];
+                        homeworld.innerHTML = character['homeworld'];     
+                    })
+                })
+            }
+            ApiInterface(); 
+        </script>
+        
+</body>
+</html>
